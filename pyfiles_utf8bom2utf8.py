@@ -3,6 +3,8 @@
 """
     Xs Python Utilities
     Copyright (C) 2023  Xiao Siyu
+
+    批量将Python源文件的编码从UTF-8-bom修改为UTF-8
 """
 
 from typing import *

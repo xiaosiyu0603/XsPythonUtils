@@ -3,6 +3,8 @@
 """
     Xs Python Utilities
     Copyright (C) 2023  Xiao Siyu
+
+    批量修改文件编码至指定编码，带过滤器
 """
 
 from argparse import ArgumentParser, Namespace

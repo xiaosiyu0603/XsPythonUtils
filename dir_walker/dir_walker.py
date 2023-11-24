@@ -33,11 +33,19 @@ def walk_path(path: Union[str, bytes], filter: Optional[Callable[[Union[str, byt
 
 
 @overload
-def walk(paths: Union[List[str], List[bytes]], filter: Optional[Callable[[Union[str, bytes]], bool]] = None) -> Generator[Union[str, bytes], None, None]:
+def walk(paths: str, filter: Optional[Callable[[str], bool]] = None) -> Generator[str, None, None]:
     ...
 
 @overload
-def walk(path: Union[str, bytes], filter: Optional[Callable[[Union[str, bytes]], bool]] = None) -> Generator[Union[str, bytes], None, None]:
+def walk(paths: bytes, filter: Optional[Callable[[bytes], bool]] = None) -> Generator[bytes, None, None]:
+    ...
+
+@overload
+def walk(paths: List[str], filter: Optional[Callable[[str], bool]] = None) -> Generator[str, None, None]:
+    ...
+
+@overload
+def walk(paths: List[bytes], filter: Optional[Callable[[bytes], bool]] = None) -> Generator[bytes, None, None]:
     ...
 
 def walk(paths: Union[List[str], List[bytes], str, bytes], filter: Optional[Callable[[Union[str, bytes]], bool]] = None):
@@ -52,5 +60,5 @@ def walk(paths: Union[List[str], List[bytes], str, bytes], filter: Optional[Call
 
 
 if __name__ == '__main__':
-    for path in walk(b".", lambda x: os.path.splitext(x)[1].lower() == b'.py'):
-        print(repr(path))
+    for filepath in walk(b".", lambda x: os.path.splitext(x)[1].lower() == b'.py'):
+        print(repr(filepath))

@@ -13,9 +13,14 @@
 
 ### 包含模块
 
-| 模块                                     | 功能                               |
-| ---------------------------------------- | ---------------------------------- |
-| [dir_walker](./dir_walker/dir_walker.py) | 产生一个递归遍历目录中文件的生成器 |
+| 模块                                      | 功能                               |
+| ----------------------------------------- | ---------------------------------- |
+| [dir_walker](./dir_walker/dir_walker.py)  | 产生一个递归遍历目录中文件的生成器 |
+| [utils](./utils)                          | 一些零碎且被重复使用的实用工具     |
+| [utils.argparse](./utils/argparse.py)     | argpasre扩展                       |
+| [utils.pseudo_cpp](./utils/pseudo_cpp.py) | 模拟C++同名定义的功能的实用工具    |
+| [utils.py](./utils/py.py)                 | Python语言相关实用工具             |
+| [utils/type](./utils/type.py)             | 类型相关实用工具                   |
 
 ### 参考资料
 

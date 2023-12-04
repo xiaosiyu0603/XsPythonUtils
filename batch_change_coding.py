@@ -7,41 +7,34 @@
     批量修改文件编码至指定编码，带过滤器
 """
 
-from argparse import ArgumentParser, Namespace
+__author__ = "Xiao Siyu"
+__copyright__ = """\
+    Xs Python Utilities
+    Copyright (C) 2023  Xiao Siyu
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+"""
+
+
 from typing import *
 import sys
 import os
 import argparse
-import codecs
 
-from dir_walker import *
+import dir_walker
+from utils.argparse import *
 
-
-class ExtNameAction(argparse.Action):
-
-    def __call__(self, parser: ArgumentParser, namespace: Namespace, values: Sequence[str], option_string: str) -> None:
-        # print("values =", values)
-        # print("option_string =", option_string)
-        lower_values = list()
-        for item in values:
-            if not item.startswith("."):
-                raise argparse.ArgumentError(self, f"'{item}' is not a valid filter (.*)")
-            lower_values.append(item.lower())
-        setattr(namespace, self.dest, lower_values)
-        return
-
-
-class CodingNameAction(argparse.Action):
-
-    def __call__(self, parser: ArgumentParser, namespace: Namespace, values: str, option_string: str) -> None:
-        # print("values =", values)
-        # print("option_string =", option_string)
-        try:
-            codecs.lookup(values)
-        except LookupError as err:
-            raise argparse.ArgumentError(self, str(err))
-        setattr(namespace, self.dest, values)
-        return
 
 
 def parsearg(argv: List[str]):
@@ -75,7 +68,7 @@ def main(argv: List[str]):
     fm: str = args.fm
     to: str = args.to
     filter_list: Optional[List[str]] = args.filter
-    for filepath in walk(path, None if filter_list is None else (lambda x: os.path.splitext(x)[1].lower() in filter_list)):
+    for filepath in dir_walker.walk(path, None if filter_list is None else (lambda x: os.path.splitext(x)[1].lower() in filter_list)):
         change_encoding(filepath, fm, to)
     os.system("pause")
     return
